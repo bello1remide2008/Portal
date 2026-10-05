@@ -41,7 +41,32 @@ function App() {
     alert(`Account created! Username: ${newUsername}`);
     navigate("/login");
   };
+const handleLogin = (data) => {
+  const foundUser = users.find(
+    (user) =>
+      user.username === data.username &&
+      user.email === data.email &&
+      user.password === data.password &&
+      user.role === "user"
+  );
 
+  if (!foundUser) {
+    alert("Invalid credentials. Please check your username, email and password.");
+    return false;
+  }
+
+  setCurrentUser(foundUser);
+
+  localStorage.setItem("user", JSON.stringify(foundUser));
+  localStorage.setItem("userName", foundUser.username);
+  localStorage.setItem("userUsername", foundUser.username);
+  localStorage.setItem("userEmail", foundUser.email);
+  localStorage.setItem("userPassword", foundUser.password);
+
+  navigate("/dashboard");
+
+  return true;
+};
 
 
 
@@ -89,10 +114,10 @@ function App() {
         <Route path="/login-choice" element={<LoginChoice />} />
 
         <Route
-          path="/login"
-          element={<Login 
-            />}
-        />
+  path="/login"
+  element={<Login onLogin={handleLogin} />}
+/>
+        
         <Route
         path="/admin-login"
         element={<AdminLogin 
