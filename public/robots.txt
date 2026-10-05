@@ -1,0 +1,434 @@
+mport React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { FaBars } from "react-icons/fa";
+import "./AdminDashboard.css";
+
+/* ================= UPLOAD RESULTS ================= */
+
+const AdminContent = ({active, }) => {
+  const [students, setStudents] = useState([]);
+  const [results, setResults] = useState([]);
+  const [assignments, setAssignments] = useState([]);
+  const [selectedStudent, setSelectedStudent] = useState(null);
+
+  const [resultForm, setResultForm] = useState({
+    subject: "",
+    ca: "",
+    exam: ""
+  });
+
+  const [assignForm, setAssignForm] = useState({
+    subject: "",
+    task: "",
+    due: ""
+  });
+
+  useEffect(() => {
+    setStudents(JSON.parse(localStorage.getItem("users")) || []);
+    setResults(JSON.parse(localStorage.getItem("results")) || []);
+    setAssignments(JSON.parse(localStorage.getItem("assignments")) || []);
+  }, []);
+
+  const saveResults = (data) => {
+    setResults(data);
+    localStorage.setItem("results", JSON.stringify(data));
+  };
+
+  const saveAssignments = (data) => {
+    setAssignments(data);
+    localStorage.setItem("assignments", JSON.stringify(data));
+  };
+
+  const addResult = (e) => {
+    e.preventDefault();
+    if (!selectedStudent) return;
+
+    const newItem = {
+      id: Date.now(),
+      studentId: selectedStudent.username,
+      subject: resultForm.subject,
+      ca: Number(resultForm.ca),
+      exam: Number(resultForm.exam),
+      total: Number(resultForm.ca) + Number(resultForm.exam),
+    };
+
+    const updated = [newItem, ...results];
+    saveResults(updated);
+    setResultForm({ subject: "", ca: "", exam: "" });
+  };
+
+  const addAssignment = (e) => {
+    e.preventDefault();
+    const newItem = { id: Date.now(), ...assignForm };
+    const updated = [newItem, ...assignments];
+    saveAssignments(updated);
+    setAssignForm({ subject: "", task: "", due: "" });
+  };
+
+  return (
+    <main className="admin-main">
+
+      {active === "results" && selectedStudent && (
+        <div>
+          <h2>Results for {selectedStudent.username}</h2>
+
+          <form onSubmit={addResult}>
+            <input placeholder="Subject" value={resultForm.subject}
+              onChange={e => setResultForm({...resultForm, subject:e.target.value})} required />
+            <input type="number" placeholder="CA" value={resultForm.ca}
+              onChange={e => setResultForm({...resultForm, ca:e.target.value})} required />
+            <input type="number" placeholder="Exam" value={resultForm.exam}
+              onChange={e => setResultForm({...resultForm, exam:e.target.value})} required />
+            <button>Add Result</button>
+          </form>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Subject</th>
+                <th>CA</th>
+                <th>Exam</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {results.filter(r => r.studentId === selectedStudent.username)
+                .map(r => (
+                  <tr key={r.id}>
+                    <td>{r.subject}</td>
+                    <td>{r.ca}</td>
+                    <td>{r.exam}</td>
+                    <td>{r.total}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {active === "assignments" && (
+        <div>
+          <h2>Assignments</h2>
+
+          <form onSubmit={addAssignment}>
+            <input placeholder="Subject" value={assignForm.subject}
+              onChange={e => setAssignForm({...assignForm, subject:e.target.value})} required />
+            <input placeholder="Assignment" value={assignForm.task}
+              onChange={e => setAssignForm({...assignForm, task:e.target.value})} required />
+            <input type="date" value={assignForm.due}
+              onChange={e => setAssignForm({...assignForm, due:e.target.value})} required />
+            <button>Add</button>
+          </form>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Subject</th>
+                <th>Task</th>
+                <th>Due</th>
+              </tr>
+            </thead>
+            <tbody>
+              {assignments.map(a => (
+                <tr key={a.id}>
+                  <td>{a.subject}</td>
+                  <td>{a.task}</td>
+                  <td>{a.due}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+    </main>
+  );
+};
+
+const ChatUI = () => {
+  const [messages, setMessages] = useState([]);
+  const [reply, setReply] = useState("");
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("chats")) || [];
+    setMessages(data.filter(m => m.to === "admin"));
+  }, []);
+
+  return (
+    <div>
+      <h2>Messages</h2>
+
+      {messages.map(m => (
+        <div key={m.id}>
+          <strong>{m.from}</strong>: {m.text} ({m.time})
+        </div>
+      ))}
+
+      <form onSubmit={e => {
+        e.preventDefault();
+        const chats = JSON.parse(localStorage.getItem("chats")) || [];
+        chats.push({
+          id: Date.now(),
+          from: "admin",
+          to: "student",
+          text: reply,
+          time: new Date().toLocaleTimeString()
+        });
+        localStorage.setItem("chats", JSON.stringify(chats));
+        setReply("");
+      }}>
+        <input value={reply} onChange={e => setReply(e.target.value)} placeholder="Reply..." />
+        <button>Send</button>
+      </form>
+    </div>
+  );
+};
+
+/* ================= CREATE BLOG ================= */
+
+const CreateBlog = () => {
+  
+
+
+    const [blogForm, setBlogForm] = useState({
+  title: "",
+  content: "",
+  link: "",
+  image: ""
+});
+
+const handleBlogImage = (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    setBlogForm(prev => ({ ...prev, image: reader.result }));
+  };
+  reader.readAsDataURL(file);
+};
+
+const saveBlog = (e) => {
+  e.preventDefault();
+  const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
+  const newBlog = { id: Date.now(), ...blogForm };
+  localStorage.setItem("blogs", JSON.stringify([newBlog, ...blogs]));
+  setBlogForm({ title: "", content: "", link: "", image: "" });
+};
+
+  
+
+  return (
+    <form onSubmit={saveBlog} className="form-grid"> 
+  <input
+    placeholder="Title"
+    value={blogForm.title}
+    onChange={e => setBlogForm({...blogForm, title:e.target.value})}
+    required
+  />
+
+  <textarea
+    placeholder="Content"
+    value={blogForm.content}
+    onChange={e => setBlogForm({...blogForm, content:e.target.value})}
+    required
+  />
+
+  <input
+    placeholder="Blog Link"
+    value={blogForm.link}
+    onChange={e => setBlogForm({...blogForm, link:e.target.value})}
+  />
+
+  <input type="file" accept="image/*" onChange={handleBlogImage} />
+
+  <button>Add Blog</button>
+</form>
+  );
+};
+
+
+/* ================= UPLOAD UPDATES ================= */
+
+const UploadUpdates = ({ onSave }) => {
+  const [msg, setMsg] = useState("");
+
+  const submit = (e) => {
+    e.preventDefault();
+    const updates = JSON.parse(localStorage.getItem("updates")) || [];
+    localStorage.setItem("updates", JSON.stringify([{ id: Date.now(), text: msg }, ...updates]));
+    setMsg("");
+    onSave && onSave();
+  };
+
+  return (
+    <div className="admin-panel">
+      <h3>Post Update</h3>
+      <form onSubmit={submit} className="form-grid">
+        <textarea value={msg} onChange={e => setMsg(e.target.value)} required />
+        <button>Post</button>
+      </form>
+    </div>
+  );
+};
+
+/* ================= MANAGE STUDENTS ================= */
+
+const ManageStudents = () => {
+  const [students, setStudents] = useState([]);
+
+  useEffect(() => {
+    setStudents(JSON.parse(localStorage.getItem("students")) || []);
+  }, []);
+
+  const deleteStudent = (id) => {
+    const filtered = students.filter(s => s.id !== id);
+    localStorage.setItem("students", JSON.stringify(filtered));
+    setStudents(filtered);
+  };
+
+  return (
+    <div className="admin-panel">
+      <h3>Students</h3>
+      {students.map(st => (
+        <div key={st.id} className="list-item">
+          <span>{st.name}</span>
+          <button onClick={() => deleteStudent(st.id)}>Delete</button>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+/* ================= MAIN ADMIN DASHBOARD ================= */
+
+const AdminDashboard = () => {
+  const navigate = useNavigate();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [active, setActive] = useState("students"); // MAIN PAGE
+  const [blogs, setBlogs] = useState([]);
+  const [students, setStudents] = useState([]);
+  const [selectedStudent, setSelectedStudent] = useState(null);
+
+  useEffect(() => {
+    if (!localStorage.getItem("role")) {
+      navigate("/login-choice");
+    }
+    setStudents(JSON.parse(localStorage.getItem("users")) || []);
+  }, []);
+  const stored = JSON.parse(localStorage.getItem("students")) || [];
+setStudents(stored);
+
+
+  const fetchBlogs = async () => {
+    const res = await axios.get("http://localhost:3000/api/blogs");
+    setBlogs(res.data);
+  };
+
+  const handleDelete = async (id) => {
+    await axios.delete(`http://localhost:3000/api/blogs/${id}`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    });
+    setBlogs(prev => prev.filter(b => b._id !== id));
+  };
+
+  useEffect(() => {
+    if (active === "blogs") fetchBlogs();
+  }, [active]);
+
+  return (
+    <div className="admin-wrap">
+      <header className="admin-top">
+        <FaBars onClick={() => setSidebarOpen(!sidebarOpen)} />
+        <h2>Admin Dashboard</h2>
+      </header>
+
+      <aside className={`admin-side ${sidebarOpen ? "open" : ""}`}>
+        <ul>
+          <li onClick={() => setActive("students")}>Student Data</li>
+          <li onClick={() => setActive("results")}>Results</li>
+          <li onClick={() => setActive("assignments")}>Assignments</li>
+          <li onClick={() => setActive("updates")}>Updates</li>
+          <li onClick={() => setActive("blogs")}>Blogs</li>
+          <li onClick={() => setActive("chat")}>Messages</li>
+
+        </ul>
+      </aside>
+
+      <main className="admin-main">
+{(active === "results" || active === "assignments") && (
+  <AdminContent active={active} selectedStudent={selectedStudent} />
+)}
+
+{active === "chat" && <ChatUI />}
+
+
+
+        {active === "students" && (
+          <div>
+            <h2>Student Data</h2>
+            <table>
+              <thead>
+              
+                  <tr>
+  <th>Name</th>
+  <th>Username</th>
+  <th>Class</th>
+  
+  <th>Action</th>
+</tr>
+
+              </thead>
+              <tbody>
+                {students.map(st => (
+                  <tr key={st.username}>
+                    <td>{st.username}</td>
+                    <td>{st.name || st.fullname || "Student"}</td>
+                    <td>
+                      <button onClick={() => {
+                        setSelectedStudent(st);
+                        setActive("results");
+                      }}>
+                        Enter Results
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {active === "updates" && <UploadUpdates />}
+        {active === "blogs" && (
+          <div className="admin-panel">
+            <CreateBlog onDone={fetchBlogs} />
+            {blogs.map(blog => (
+              <div key={blog._id} className="list-item">
+                <strong>{blog.title}</strong>
+                <button onClick={() => handleDelete(blog._id)}>Delete</button>
+              </div>
+            ))}
+          </div>
+        )}
+
+      </main>
+    </div>
+  );
+};
+
+export default AdminDashboard;
+<table>
+              <thead>
+                <tr>
+                  <th>Username</th>
+                  <th>Name</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+            localStorage.setItem("students", JSON.stringify(allStudents));  
+            else{
+  saveResults([newItem,...results]);
+}
