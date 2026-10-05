@@ -1,0 +1,91 @@
+/* SchoolDetails.css */
+
+.school-details-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8faff;
+  color: #333;
+}
+
+/* Blue top banner */
+.school-header {
+  background: linear-gradient(135deg, #007bff, #0056d2);
+  color: white;
+  padding: 3rem 2rem;
+  text-align: center;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.school-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.school-header p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* Main content section */
+.school-content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 3rem 5%;
+  flex-wrap: wrap;
+}
+
+/* Text description section */
+.school-description {
+  flex: 1;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #444;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  transition: transform 0.3s ease;
+}
+
+.school-description:hover {
+  transform: translateY(-5px);
+}
+
+/* Image section (school banner) */
+.school-banner {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.school-banner img {
+  width: 100%;
+  max-width: 550px;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.4s ease;
+}
+
+.school-banner img:hover {
+  transform: scale(1.03);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .school-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .school-banner img {
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,15 @@
+/* src/App.css */
+.school-list {
+  padding: 3rem 2rem;
+}
+
+.school-list h2 {
+  margin-bottom: 2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+

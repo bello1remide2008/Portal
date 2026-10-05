@@ -1,0 +1,53 @@
+.updates-container {
+  padding: 20px;
+}
+
+.updates-header {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 25px;
+  color: #222;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.timetable {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.timetable thead {
+  background: #003366;
+  color: white;
+}
+
+.timetable th,
+.timetable td {
+  padding: 14px 18px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+  font-size: 15px;
+}
+
+.timetable tbody tr:hover {
+  background: #f5faff;
+}
+
+.timetable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+@media (max-width: 600px) {
+  .timetable th,
+  .timetable td {
+    font-size: 13px;
+    padding: 10px;
+  }
+}

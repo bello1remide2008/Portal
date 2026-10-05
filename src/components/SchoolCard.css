@@ -1,0 +1,46 @@
+/* src/components/SchoolCard.css */
+.school-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 1rem;
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
+}
+.school-image-wrapper{
+  margin-top: 10px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+
+
+.school-card:hover {
+  transform: scale(1.05);
+  box-shadow:0 4px 12px rgba(0,0,0,0.08)
+}
+
+.school-image {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.school-card:hover .school-image{
+  transform: scale(1.05);
+}
+
+.register-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.register-btn:hover {
+  background: #0056b3;
+}

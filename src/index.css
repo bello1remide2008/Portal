@@ -1,0 +1,42 @@
+/* Reset default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Apply a clean font across the app */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: aliceblue;
+  color: #333;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Make links clean */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Add a nice container for layout */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Buttons (global style so they look consistent) */
+button {
+  font-family: inherit;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

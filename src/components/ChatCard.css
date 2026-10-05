@@ -1,0 +1,38 @@
+.chat-card {
+  background: var(--card);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  border: 1px solid var(--border);
+  max-width: 450px;
+}
+
+.chat-card h3 {
+  margin-bottom: 12px;
+}
+
+.chat-card textarea {
+  width: 100%;
+  min-height: 120px;
+  border-radius: 12px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  resize: none;
+  font-family: inherit;
+}
+
+.chat-card button {
+  margin-top: 12px;
+  background: #4c6fff;
+  color: white;
+  padding: 12px;
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.chat-card button:hover {
+  background: #3b5bff;
+}

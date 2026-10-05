@@ -1,0 +1,140 @@
+/* ==============================
+   MODAL OVERLAY (BACKGROUND)
+   ============================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* ==============================
+   MODAL CONTAINER / BOX
+   ============================== */
+.modal-box {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 35px 30px;
+  border-radius: 16px;
+  width: 95%;
+  max-width: 420px;
+ backdrop-filter: blur(20px);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  animation: slideUp 0.35s ease;
+}
+
+/* Title */
+.modal-box h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 5px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Label */
+.modal-box label {
+  font-size: 14px;
+  margin-top: 5px;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+/* Inputs */
+.modal-box input {
+  width: 100%;
+  padding: 14px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0.85);
+  transition: 0.3s;
+}
+
+.modal-box input:focus {
+  background: #fff;
+  transform: scale(1.02);
+  box-shadow: 0 0 8px rgba(0, 122, 255, 0.5);
+}
+
+/* Register Button */
+.register-btn {
+  background: linear-gradient(135deg, #007bff, #0056c9);
+  color: #fff;
+  font-size: 17px;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s ease;
+}
+
+.register-btn:hover {
+  background: linear-gradient(135deg, #1c8bff, #004bb5);
+  transform: translateY(-2px);
+}
+
+/* Switch to Login */
+.switch-text {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.switch-text .link {
+  color: #00d2ff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.switch-text .link:hover {
+  text-decoration: underline;
+}
+
+/* ==============================
+   ANIMATIONS
+   ============================== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* ==============================
+   RESPONSIVENESS
+   ============================== */
+@media (max-width: 420px) {
+  .modal-box {
+    padding: 25px 20px;
+  }
+
+  .modal-box h2 {
+    font-size: 24px;
+  }
+
+  .register-btn {
+    padding: 12px;
+    font-size: 16px;
+  }
+}
+

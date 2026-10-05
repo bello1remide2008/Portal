@@ -1,0 +1,561 @@
+ *,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  font-family: 'poppins' sans-serif;
+}
+
+   body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f3f7f4;
+      color: #222;
+      line-height: 1.6;
+    }
+    .home {
+  width: 100%;
+  overflow-x: hidden;
+  background-color: #f9f9ff;
+  color: #222;
+  font-family: "Poppins", sans-serif;
+}
+
+/* =====================================
+        MODERN HERO SECTION
+===================================== */
+
+.hero-section {
+  position: relative;
+ height: 100vh;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding: 0 20px;
+
+
+  background-image: url("happystudent2.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+
+  /* Soft shadow for modern look */
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+}
+
+/* ✨ DARK OVERLAY */
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+/* =====================================
+      BEAUTIFUL HOVER IMAGE LAYERS
+===================================== */
+
+.hero-img-layer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+  z-index: 0;
+}
+
+/* Layer Images */
+.hero-img2 {
+  background-image: url("reading.jpg");
+}
+.hero-img3 {
+  background-image: url("picture2.jpeg");
+}
+.hero-img4 {
+  background-image: url("happystudent.jpeg");
+}
+
+/* Hover fade-in order */
+.hero-section:hover .hero-img2 {
+  opacity: 1;
+}
+.hero-section:hover .hero-img3 {
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+.hero-section:hover .hero-img4 {
+  opacity: 1;
+  transition-delay: 0.4s;
+}
+
+/* =====================================
+        HERO CONTENT (MODERNIZED)
+===================================== */
+
+.hero-content {
+  z-index: 2;
+  text-align: center;
+  color: white;
+  padding: 20px;
+  animation: fadeUp 1.2s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeUp {
+  from {
+    transform: translateY(25px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.hero-content h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -1px;
+}
+
+.hero-content h1 span {
+  color: #ffb703;
+}
+
+.hero-content p {
+  margin-top: 12px;
+  font-size: clamp(1rem, 3.5vw, 1.2rem);
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+/* Modern button */
+.hero-btn {
+  margin-top: 25px;
+  padding: 14px 28px;
+  background: #ffdd00;
+  border-radius: 10px;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.hero-btn:hover {
+  background: #ffe676;
+  transform: translateY(-3px);
+}
+
+
+.seaech-bar p{
+  font-weight: 500;
+  margin-top: 50px;
+  color: #222;
+  text-align: center;
+}
+.search-bar input{
+  padding: 12px 15px;
+  width: 80%;
+  max-width: 400px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+.search-bar button {
+  padding: 12px 25px;
+  background-color: #ffdd00;
+  border: none;
+  border-radius: 8px;
+  color: #222;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.search-bar button:hover {
+  background-color: #ffe44d;
+}
+
+.search-box {
+  display: flex;
+  justify-content: center;
+}
+
+
+
+.about-section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 80px auto;
+  padding: 60px 30px;
+
+  background: #ffffff;
+  border-radius: 28px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+/* Heading Style */
+.about-section h2 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #1a1a1a;
+}
+
+.about-section h2 span {
+  color: #007bff;
+}
+
+/* About Text */
+.about-section p {
+  font-size: 1.15rem;
+  max-width: 800px;
+  line-height: 1.75rem;
+  color: #454545;
+  margin-bottom: 10px;
+}
+
+/* About Image */
+.about-image {
+  width: 380px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.about-image:hover {
+  transform: scale(1.03);
+}
+
+/* =========================================
+      FEATURES SECTION (MODERN, GRID)
+========================================= */
+
+.features-section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 60px 30px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  gap: 40px;
+  
+}
+
+
+.features-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+
+}
+.features-grid:hover {
+  transform: translateY(-5px);
+}
+.feature-card {
+  background: #fdfdfd;
+  padding: 30px;
+  border-radius: 22px;
+  flex:1;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.07);
+  transition: 0.3s ease;
+  border: 1px solid #e9eef5;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.10);
+}
+
+.feature-card h3 {
+  font-size: 1.6rem;
+  margin-bottom: 18px;
+  font-weight: 700;
+  color: #14213d;
+}
+
+.feature-card p {
+  font-size: 1.05rem;
+  color: #555;
+  line-height: 1.7rem;
+}
+
+/* Optional feature image */
+.feature-image {
+  width: 100%;
+  border-radius: 14px;
+  margin-top: 20px;
+}
+
+
+
+@media (min-width: 850px) {
+  .about-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+  }
+
+  .about-text {
+    flex: 1;
+    padding-right: 40px;
+  }
+
+  .about-image {
+    flex: 1;
+    width: 100%;
+  }
+  .features-grid{
+    display: flex;
+    flex-direction: column;
+    gap:30px;
+  }
+  .feature-card{
+    flex:1;
+  }
+  .feature-image{
+    width: 350px;
+    height: auto;
+  }
+}
+@media (min-width:1200px) {
+  .features-grid{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.login-link{
+  color: #007bff;
+  cursor: pointer;
+  font-weight: 600;
+   display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.3s;
+}
+.login-link:hover{
+  text-decoration: underline;
+}
+.arrow-icon{
+  background-color: #007bff;
+  font-size: 16px;
+  height: 18px;
+  width: 18px;
+}
+.login-link .arrow-icon{
+  transform: translateX(5px);
+}
+.student-image{
+  height: auto;
+  margin-top: 16px;
+  border-radius: 12px;
+}
+
+
+
+ .reading-image{
+  width: 200px;
+  height: auto;
+  margin-top: 16px;
+  border-radius: 12px;
+ }
+ .pic-register{
+  width: 200px;
+  height: auto;
+  margin-top: 16px;
+  border-radius: 12px;
+ }
+.review-image{
+  width: 200px;
+  height: auto;
+  margin-top: 16px;
+  border-radius: 12px;
+}
+.school-section {
+  background: linear-gradient(180deg, #f7faff 0%, #eef3fa 100%);
+  font-family: 'Poppins', sans-serif;
+  color: #333; 
+   text-align: center;
+  width: 100%;
+  padding: 60px 20px;
+  margin: 0 auto 60px;
+  overflow: hidden;
+
+}
+
+.school-section .h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  color: #1b3a6b;
+  margin-bottom: 30px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.schools-slider {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.schools-track {
+  display: flex;
+  gap: 20px;
+  animation: scroll 22s linear infinite;
+}
+.schools-slider:hover .schools-track {
+  animation-play-state: paused;
+}
+
+.school-card {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  width: 100%;
+  min-width:240px ;
+  max-width: 240px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.school-card:hover {
+  transform: translateY(-8px) scale(1.03) ;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.1);
+}
+
+/* === SCHOOL IMAGE === */
+.school-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+/* === SCHOOL INFO === */
+.school-card h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #1a2e5d;
+  margin-bottom: 8px;
+}
+
+.school-card p {
+  font-size: 0.95rem;
+  margin: 4px 0;
+  color: #555;
+}
+
+/* === RATING STARS === */
+.stars {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.stars i {
+  transition: transform 0.2s ease;
+}
+
+.stars i:hover {
+  transform: scale(1.3);
+}
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 0;
+    width: 100%;
+    max-width: none;
+  }
+
+  .hero-section h1 {
+    font-size: 2rem;
+  }
+
+  .features {
+    flex-direction: column;
+  }
+
+  .feature {
+    max-width: 90%;
+  }
+}
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .school-card {
+    min-width: 180px;
+  }
+
+  .school-card img {
+    height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .school-card {
+    min-width: 150px;
+  }
+
+  .school-card img {
+    height: 100px;
+  }
+
+  .school-section h2 {
+    font-size: 20px;
+  }
+}
+.register-school-btn {
+  margin-top: 10px;
+  padding: 8px 14px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.register-school-btn:hover {
+  background-color: #0056b3;
+}    
